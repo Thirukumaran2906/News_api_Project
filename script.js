@@ -8,7 +8,7 @@ const searchBtn = document.getElementById("searchBtn");
 const newsQuery = document.getElementById("newsQuery");
 const newsType = document.getElementById("newsType");
 const newsdetails = document.getElementById("newsdetails");
-const API_KEY = "4f57a526adc5435d832cf4e31bcf9602";
+const API_KEY = "----------------";
 const HEADLINES_NEWS = "https://newsapi.org/v2/top-headlines?country=in&apiKey=";
 const GENERAL_NEWS = "https://newsapi.org/v2/top-headlines?country=in&category=general&apiKey=";
 const BUSINESS_NEWS = "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=";
@@ -204,53 +204,39 @@ function displayNews() {
         newsdetails.innerHTML = "<h5>No data was fetched...</h5>"
         return;
     }
-
+    
     newsArray.forEach(news => {
-
-        var date = news.publishedAt.split("T");
-        
         var col = document.createElement('div');
         col.className="col-sm-12 col-md-4 col-lg-3 p-2 card";
-
         var card = document.createElement('div');
         card.className = "p-2";
-
         var image = document.createElement('img');
         image.setAttribute("height","matchparent");
         image.setAttribute("width","100%");
         image.src=news.urlToImage;
-
         var cardBody = document.createElement('div');
-        
         var newsHeading = document.createElement('h5');
         newsHeading.className = "card-title";
         newsHeading.innerHTML = news.title;
-
+        var date = news.publishedAt.split("T");
         var dateHeading = document.createElement('h5');
         dateHeading.className = "text-primary";
         dateHeading.innerHTML = date[0];
-
         var discription = document.createElement('p');
         discription.className="text-muted";
         discription.innerHTML = news.description;
-
         var link = document.createElement('a');
         link.className="btn btn-primary";
         link.setAttribute("target", "_blank");
         link.href = news.url;
         link.innerHTML="Read more...";
-
         cardBody.appendChild(newsHeading);
         cardBody.appendChild(dateHeading);
         cardBody.appendChild(discription);
         cardBody.appendChild(link);
-
         card.appendChild(image);
         card.appendChild(cardBody);
-
         col.appendChild(card);
-
         newsdetails.appendChild(col);
     });
-
 }
